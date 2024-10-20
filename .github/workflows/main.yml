@@ -10,7 +10,7 @@ jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
-
+    
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,11 +22,11 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      - name: Setup Java 17
+      - name: Setup Java 17 (Adoptium)
         uses: actions/setup-java@v3
         with:
-          java-version: "17" # Instala Java 17
-          distribution: "adoptium" # Cambiado de adoptopenjdk a adoptium
+          java-version: '17' # Instala Java 17
+          distribution: 'adoptopenjdk' # Usamos adoptopenjdk para instalar la versión de Java 17
 
       - name: Install Sonar Scanner
         run: |
