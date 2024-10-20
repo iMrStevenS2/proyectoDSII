@@ -22,22 +22,11 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      # - name: Setup Java 17 (Adoptium)
-      #   uses: actions/setup-java@v4
-      #   with:
-      #     distribution: 'temurin' # See 'Supported distributions' for available options
-      #     java-version: '17'
-
-      # - name: Install Sonar Scanner
-      #   run: |
-      #     # Descargar la última versión de SonarScanner
-      #     curl -sS https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip -o sonar-scanner.zip
-      #     # Descomprimir el archivo
-      #     unzip sonar-scanner.zip
-      #     # Mover el directorio a un espacio accesible dentro del directorio de trabajo de GitHub Actions
-      #     mv sonar-scanner-4.7.0.2747-linux sonar-scanner
-      #     # Agregar sonar-scanner al PATH
-      #     echo "${{ github.workspace }}/sonar-scanner/bin" >> $GITHUB_PATH
+      - name: Setup Java 17 (Adoptium)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # Usar 'temurin' para la distribución de Eclipse Adoptium
+          java-version: '17'
 
       - name: Install Sonar Scanner 2.6
         run: |
