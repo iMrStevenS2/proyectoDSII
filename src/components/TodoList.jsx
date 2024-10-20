@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useState } from "react";
+import React from "react";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
-  const [task, setTask] = useState('');
+  const [task, setTask] = useState("");
 
   const addTodo = () => {
     if (task.trim()) {
       setTodos([...todos, { task, completed: false }]);
-      setTask('');
+      setTask("");
     }
   };
 
@@ -25,7 +26,7 @@ const TodoList = () => {
   return (
     <div>
       <h1>Todo List</h1>
-      <input 
+      <input
         type="text"
         value={task}
         onChange={(e) => setTask(e.target.value)}
@@ -38,13 +39,13 @@ const TodoList = () => {
           <li key={index}>
             <span
               style={{
-                textDecoration: todo.completed ? 'line-through' : 'none',
+                textDecoration: todo.completed ? "line-through" : "none",
               }}
             >
               {todo.task}
             </span>
             <button onClick={() => toggleComplete(index)}>
-              {todo.completed ? 'Undo' : 'Complete'}
+              {todo.completed ? "Undo" : "Complete"}
             </button>
             <button onClick={() => deleteTodo(index)}>Delete</button>
           </li>
