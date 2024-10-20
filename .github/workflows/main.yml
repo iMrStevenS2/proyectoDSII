@@ -25,7 +25,7 @@ jobs:
       - name: Install Sonar Scanner
         run: |
           # Descargar la última versión de SonarScanner
-          curl -sS https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-4.7.0.2747-linux.zip -o sonar-scanner.zip
+          curl -sS https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip -o sonar-scanner.zip
           # Descomprimir el archivo
           unzip sonar-scanner.zip
           # Mover el directorio a /usr/local/sonar-scanner
