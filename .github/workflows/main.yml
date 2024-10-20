@@ -5,24 +5,37 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      
       - name: Install Dependencies
         run: npm install
+      
       - name: Run Tests
         run: npm test
-      - name: Sonar Scanner
-        run: sonar-scanner
-  
+      
+      - name: Install Sonar Scanner
+        run: |
+          # Install SonarScanner
+          curl -sS https://downloads.sonarsource.com/sonar-scanner-cli/sonar-scanner-4.6.2.2472-linux.zip -o sonar-scanner.zip
+          unzip sonar-scanner.zip
+          mv sonar-scanner-4.6.2.2472-linux /usr/local/sonar-scanner
+          echo "export PATH=$PATH:/usr/local/sonar-scanner/bin" >> $GITHUB_ENV
+      
+      - name: Run Sonar Scanner
+        run: sonar-scanner -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG }} -Dsonar.host.url=https://sonarcloud.io
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      
+a
