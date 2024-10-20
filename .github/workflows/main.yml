@@ -19,8 +19,8 @@ jobs:
       - name: Setup Java 17 (Adoptium)
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin' # Usar 'temurin' para la distribución de Eclipse Adoptium
-          java-version: '17'
+          distribution: "temurin" # Usar 'temurin' para la distribución de Eclipse Adoptium
+          java-version: "17"
 
       - name: Install Dependencies
         run: npm install
@@ -40,7 +40,7 @@ jobs:
           echo "${{ github.workspace }}/sonar-scanner/bin" >> $GITHUB_PATH
 
       - name: Run Sonar Scanner
-        run: sonar-scanner -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG }} -Dsonar.host.url=https://sonarcloud.io -X
+        run: sonar-scanner -Dsonar.login=${{secrets.SONAR_TOKEN}} -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG }} -Dsonar.host.url=https://sonarcloud.io -X
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
