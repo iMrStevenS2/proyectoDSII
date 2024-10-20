@@ -22,9 +22,12 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      - name: Install Java 17
-        run: sudo apt-get install openjdk-17-jdk -y
-
+      - name: Setup Java 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17' # Instala Java 17
+          distribution: 'adoptopenjdk' # Puedes cambiar a 'adoptium' si prefieres otra distribución
+          
       - name: Install Sonar Scanner
         run: |
           # Descargar la última versión de SonarScanner
