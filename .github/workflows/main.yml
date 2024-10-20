@@ -22,21 +22,31 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      - name: Setup Java 17 (Adoptium)
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
-          java-version: '17'
+      # - name: Setup Java 17 (Adoptium)
+      #   uses: actions/setup-java@v4
+      #   with:
+      #     distribution: 'temurin' # See 'Supported distributions' for available options
+      #     java-version: '17'
 
-      - name: Install Sonar Scanner
+      # - name: Install Sonar Scanner
+      #   run: |
+      #     # Descargar la última versión de SonarScanner
+      #     curl -sS https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip -o sonar-scanner.zip
+      #     # Descomprimir el archivo
+      #     unzip sonar-scanner.zip
+      #     # Mover el directorio a un espacio accesible dentro del directorio de trabajo de GitHub Actions
+      #     mv sonar-scanner-4.7.0.2747-linux sonar-scanner
+      #     # Agregar sonar-scanner al PATH
+      #     echo "${{ github.workspace }}/sonar-scanner/bin" >> $GITHUB_PATH
+
+      - name: Install Sonar Scanner 2.6
         run: |
-          # Descargar la última versión de SonarScanner
-          curl -sS https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-2.6.zip -o sonar-scanner.zip
-          # Descomprimir el archivo
-          unzip sonar-scanner.zip
-          # Mover el directorio a un espacio accesible dentro del directorio de trabajo de GitHub Actions
-          mv sonar-scanner-4.7.0.2747-linux sonar-scanner
-          # Agregar sonar-scanner al PATH
+          # Descargar y extraer SonarScanner 2.6
+          curl -sS https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-2.6.zip -o sonar-scanner-2.6.zip
+          unzip sonar-scanner-2.6.zip
+          mv sonar-scanner-2.6 sonar-scanner
+
+          # Añadir SonarScanner al PATH
           echo "${{ github.workspace }}/sonar-scanner/bin" >> $GITHUB_PATH
 
       - name: Run Sonar Scanner
